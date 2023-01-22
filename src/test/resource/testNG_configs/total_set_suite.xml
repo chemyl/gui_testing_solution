@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="total_set_suite" verbose="1" parallel="methods" thread-count="5">
+
+    <test name="desktop_tests">
+        <parameter name="browser_mode" value="desktop"/>
+        <groups>
+            <run>
+                <include name="desktop"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="domain.*"/>
+        </packages>
+    </test>
+
+    <test name="mobile_tests">
+        <parameter name="browser_mode" value="mobile"/>
+        <groups>
+            <run>
+                <include name="mobile"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="domain.*"/>
+        </packages>
+    </test>
+</suite>
