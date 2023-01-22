@@ -10,10 +10,62 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.testng:testng:7.4.0'
+    implementation 'com.codeborne:selenide:6.4.0'
+    implementation 'org.selenide:selenide-selenoid:2.2.3'
+    implementation 'io.qameta.allure:allure-testng:2.18.1'
+    implementation 'org.assertj:assertj-core:3.23.1'
+    implementation 'com.itextpdf:itextpdf:5.5.13.3'
+    implementation 'org.slf4j:slf4j-nop:2.0.0-alpha1'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+    implementation 'com.epam.reportportal:agent-allure-testng:5.1.0-BETA-3'
+    implementation 'io.qameta.allure:io.qameta.allure.gradle.plugin:2.10.0'
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG() {
+        if (project.hasProperty('config')) {
+            suites "src/test/resources/test_configs/${config}.xml"
+        } else {
+            suites "src/test/resources/test_configs/total_set_suite.xml"
+        }
+
+        jvmArgs += "-DbaseUrl=${baseUrl}"
+        jvmArgs += "-DretryCount=${retryCount}"
+        jvmArgs += "-Dbrowser=${browser}"
+        jvmArgs += "-DbrowserSizeDesktop=${browserSizeDesktop}"
+        jvmArgs += "-DbrowserSizeMobile=${browserSizeMobile}"
+        jvmArgs += "-DmobileDevice=${mobileDevice}"
+        jvmArgs += "-DactionTimeout=${actionTimeout}"
+        jvmArgs += "-DsearchElementTimeout=${searchElementTimeout}"
+        jvmArgs += "-DpageLoadTimeout=${pageLoadTimeout}"
+        jvmArgs += "-DselenoidEnable=${selenoidEnable}"
+        jvmArgs += "-DselenoidUrl=${selenoidUrl}"
+        jvmArgs += "-DselenoidBrowserVersion=${selenoidBrowserVersion}"
+        jvmArgs += "-DselenoidSessionName=${selenoidSessionName}"
+
+        if (project.hasProperty('rpEndpoint')) {
+            systemProperty "rp.endpoint", project.getProperties().get('rpEndpoint')
+        }
+        if (project.hasProperty('rpUuid')) {
+            systemProperty "rp.uuid", project.getProperties().get('rpUuid')
+        }
+        if (project.hasProperty('rpLaunch')) {
+            systemProperty "rp.launch", project.getProperties().get('rpLaunch')
+        }
+        if (project.hasProperty('rpProject')) {
+            systemProperty "rp.project", project.getProperties().get('rpProject')
+        }
+        if (project.hasProperty('rpEnable')) {
+            systemProperty "rp.enable", project.getProperties().get('rpEnable')
+        }
+    }
+    options {
+        listeners.add("listeners.AnnotationTransformer")
+        listeners.add("listeners.ScreenShooter")
+    }
+    minHeapSize = "1024m"
+    maxHeapSize = "4096m"
 }
