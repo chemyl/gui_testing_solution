@@ -20,6 +20,5 @@ public class BaseManager {
     public void setUpBrowser() {
     }
 
-
 }
 

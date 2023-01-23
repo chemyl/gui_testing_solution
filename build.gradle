@@ -27,9 +27,9 @@ dependencies {
 test {
     useTestNG() {
         if (project.hasProperty('config')) {
-            suites "src/test/resources/test_configs/${config}.xml"
+            suites "src/test/resources/test_suites/${config}.xml"
         } else {
-            suites "src/test/resources/test_configs/total_set_suite.xml"
+            suites "src/test/resources/test_suites/total_set_suite.xml"
         }
 
         jvmArgs += "-DbaseUrl=${baseUrl}"
@@ -63,7 +63,7 @@ test {
         }
     }
     options {
-        listeners.add("listeners.AnnotationTransformer")
+        listeners.add("listeners.TestTransformer")
         listeners.add("listeners.ScreenShooter")
     }
     minHeapSize = "1024m"
