@@ -2,11 +2,11 @@ package steps.page_object.host;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import steps.BrowserActions;
+import steps.BaseStepsForPage;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class Header extends BrowserActions {
+public class BasketPage extends BaseStepsForPage {
     public static final SelenideElement mainHeaderLogo = $(By.xpath("//aa"));
 
     static public class SideHeader {

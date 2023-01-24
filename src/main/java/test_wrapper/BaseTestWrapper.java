@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import static constants.GlobalConstant.DESKTOP;
 import static constants.GlobalConstant.MOBILE;
 
-public class Wrapper {
+public class BaseTestWrapper {
 
     protected static final BaseAppManager app = new BaseAppManager();
     protected static final BaseApiManager api = new BaseApiManager();

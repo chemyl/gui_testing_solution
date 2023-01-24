@@ -1,10 +1,14 @@
 package app_manager;
 
-import steps.page_object.host.Footer;
-import steps.page_object.host.Header;
+import steps.assertions.BaseOverrideAssertions;
+import steps.page_object.host.BasketPage;
+import steps.page_object.host.UserInfoPage;
 
 public class BaseAppManager extends BaseManager {
 
-    public final Header header = new Header();
-    public final Footer footer = new Footer();
+    public final BasketPage header = new BasketPage();
+    public final UserInfoPage userInfoPage = new UserInfoPage();
+
+    public final BaseOverrideAssertions assertions = new BaseOverrideAssertions();
+
 }
