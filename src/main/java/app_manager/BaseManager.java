@@ -1,10 +1,10 @@
 package app_manager;
 
-import steps.BrowserActions;
+import steps.BaseStepsForPage;
 
 public class BaseManager {
 
-    public final BrowserActions browser = new BrowserActions();
+    public final BaseStepsForPage browser = new BaseStepsForPage();
 
     public void initDesktopTypeDriver() {
     }
